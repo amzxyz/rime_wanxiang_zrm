@@ -3,7 +3,7 @@
 #https://github.com/amzxyz/RIME-LMDG
 ---
 name: chars
-version: "2025-02-06 19:36"
+version: "2025-02-07 00:32"
 sort: by_weight
 ...
 啊	a;kk	915
@@ -50107,9 +50107,9 @@ sort: by_weight
 𩷹	zhuó;	1
 𪟣	zhuó;	1
 自	zì;pm	868
-资	zī;dr	833
-字	zì;gz	781
+字	zì;gz	833
 子	zǐ;va	780
+资	zī;dr	778
 咨	zī;dk	676
 紫	zǐ;vx	666
 姿	zī;dn	647
