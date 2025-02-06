@@ -3287,11 +3287,10 @@ preset_keyboards:
           key_symbol_offset_x: 0,
         }
 #下面新增最后一排按钮
-      - { click: IME_switch1, width: 20, height: 25, key_back_color: keyboard_back_color }
-      - { click: Left, width: 20, height: 25, key_back_color: keyboard_back_color }  
-      - { click: 'VOICE_ASSIST', width: 20, height: 25, key_back_color: keyboard_back_color }
-      - { click: Right, width: 20, height: 25, key_back_color: keyboard_back_color } 
-      - { click: 'Back1', width: 20, height: 25, key_back_color: keyboard_back_color }
+      - { click: IME_switch1, width: 25, height: 25, key_back_color: keyboard_back_color }
+      - { click: Left, width: 25, height: 25, key_back_color: keyboard_back_color }
+      - { click: Right, width: 25, height: 25, key_back_color: keyboard_back_color } 
+      - { click: 'Back1', width: 25, height: 25, key_back_color: keyboard_back_color }
 
 
   18jian:
@@ -3360,11 +3359,10 @@ preset_keyboards:
           key_symbol_offset_x: 0,
         }
 #下面新增最后一排按钮
-      - { click: IME_switch1, width: 20, height: 25, key_back_color: keyboard_back_color }
-      - { click: Left, width: 20, height: 25, key_back_color: keyboard_back_color }  
-      - { click: 'VOICE_ASSIST', width: 20, height: 25, key_back_color: keyboard_back_color }
-      - { click: Right, width: 20, height: 25, key_back_color: keyboard_back_color } 
-      - { click: 'Back1', width: 20, height: 25, key_back_color: keyboard_back_color }
+      - { click: IME_switch1, width: 25, height: 25, key_back_color: keyboard_back_color }
+      - { click: Left, width: 25, height: 25, key_back_color: keyboard_back_color }
+      - { click: Right, width: 25, height: 25, key_back_color: keyboard_back_color } 
+      - { click: 'Back1', width: 25, height: 25, key_back_color: keyboard_back_color }
 
 
 
@@ -3429,11 +3427,10 @@ preset_keyboards:
           key_symbol_offset_x: 0,
         }
 #下面新增最后一排按钮
-      - { click: IME_switch1, width: 20, height: 25, key_back_color: keyboard_back_color }
-      - { click: Left, width: 20, height: 25, key_back_color: keyboard_back_color }  
-      - { click: 'VOICE_ASSIST', width: 20, height: 25, key_back_color: keyboard_back_color }
-      - { click: Right, width: 20, height: 25, key_back_color: keyboard_back_color } 
-      - { click: 'Back1', width: 20, height: 25, key_back_color: keyboard_back_color }
+      - { click: IME_switch1, width: 25, height: 25, key_back_color: keyboard_back_color }
+      - { click: Left, width: 25, height: 25, key_back_color: keyboard_back_color }
+      - { click: Right, width: 25, height: 25, key_back_color: keyboard_back_color } 
+      - { click: 'Back1', width: 25, height: 25, key_back_color: keyboard_back_color }
 
 
   9jian:
@@ -3482,11 +3479,10 @@ preset_keyboards:
           key_symbol_offset_x: 0,
         }
 #下面新增最后一排按钮
-      - { click: IME_switch1, width: 20, height: 25, key_back_color: keyboard_back_color }
-      - { click: Left, width: 20, height: 25, key_back_color: keyboard_back_color }  
-      - { click: 'VOICE_ASSIST', width: 20, height: 25, key_back_color: keyboard_back_color }
-      - { click: Right, width: 20, height: 25, key_back_color: keyboard_back_color } 
-      - { click: 'Back1', width: 20, height: 25, key_back_color: keyboard_back_color }
+      - { click: IME_switch1, width: 25, height: 25, key_back_color: keyboard_back_color }
+      - { click: Left, width: 25, height: 25, key_back_color: keyboard_back_color }  
+      - { click: Right, width: 25, height: 25, key_back_color: keyboard_back_color } 
+      - { click: 'Back1', width: 25, height: 25, key_back_color: keyboard_back_color }
 
   letter:
     ascii_mode: 1
@@ -3597,11 +3593,10 @@ preset_keyboards:
           key_symbol_offset_x: 0,
         }
 #下面新增最后一排按钮
-      - { click: IME_switch1, width: 20, height: 25, key_back_color: keyboard_back_color }
-      - { click: Left, width: 20, height: 25, key_back_color: keyboard_back_color }  
-      - { click: 'VOICE_ASSIST', width: 20, height: 25, key_back_color: keyboard_back_color }
-      - { click: Right, width: 20, height: 25, key_back_color: keyboard_back_color } 
-      - { click: 'Back1', width: 20, height: 25, key_back_color: keyboard_back_color }
+      - { click: IME_switch1, width: 25, height: 25, key_back_color: keyboard_back_color }
+      - { click: Left, width: 25, height: 25, key_back_color: keyboard_back_color }  
+      - { click: Right, width: 25, height: 25, key_back_color: keyboard_back_color } 
+      - { click: 'Back1', width: 25, height: 25, key_back_color: keyboard_back_color }
 
 
   number:
@@ -3813,8 +3808,6 @@ preset_keys:
   POWER: { label: 电源, send: POWER }
   SEARCH: { label: 搜寻, send: Find }
   SLEEP: { label: 休眠, send: SLEEP }
-
-  VOICE_ASSIST: { label: 🎤, send: VOICE_ASSIST } #用于底部语音输入按钮  
   Back1: { label: 🔽, send: BACK }  #用于底部收起键盘
   IME_switch1: { label: 🌐, send: LANGUAGE_SWITCH } #用于底部弹出对话框选择输入法
 

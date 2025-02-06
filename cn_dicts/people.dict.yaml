@@ -5,7 +5,7 @@
 #^(?!.*阿姨|.*爸爸|.*伯伯|.*老师|.*村|.*乡|.*镇|.*老|.*宅|.*店|.*家|.*爷爷|.*奶奶|.*大人|.*先生|.*女士)[夏|宋|徐|丁|崔|白|梁|岳|段|赵|钱|孙|李|周|吴|郑|王|冯|秦|陈|杜|褚|卫|蒋|沈|韩|杨|朱|尤|许|何|吕|张|孔|曹|严|华|金|魏|陶|江|姜|苏|鲁|罗|雷|黄|马|叶]..\t.*\t[1-9][0-3][0-9]{2}$\n
 ---
 name: people
-version: "2025-02-05 00:07"
+version: "2025-02-06 19:36"
 sort: by_weight
 ...
 白波	bái;po bō;dy	375
@@ -39691,7 +39691,11 @@ sort: by_weight
 今垣佳奈	jīn;rv yuán;td jiā;rt nài;dx	77
 凉南佳奈	liáng;dx nán;uu jiā;rt nài;dx	1
 令加奈回	lìng;rv jiā;lk nài;dx huí;wk	1
-茂木和子	mào;cg mù;un hé;hk zǐ;va	1
+柳井健斗	liǔ;le jǐng;aa jiàn;rj dòu;du	58
+柳井久代	liǔ;le jǐng;aa jiǔ;pn dài;rg	105
+柳井寛史	liǔ;le jǐng;aa kuān; shǐ;an	1
+柳井流海	liǔ;le jǐng;aa liú;dv hǎi;dm	1
+柳井祥绪	liǔ;le jǐng;aa xiáng;py xù;so	35茂木和子	mào mù hé zǐ
 茂木弘人	mào;cg mù;un hóng;gv rén;pn	58
 茂木康亘	mào;cg mù;un kāng;gl gèn;ad	1
 茂木莉子	mào;cg mù;un lì;cd zǐ;va	1

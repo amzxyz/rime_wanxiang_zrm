@@ -445,7 +445,7 @@ speller:
 #              '`'（反引号）没有改成 '·'（间隔号）。
 #   symbols    Rime 的预设配置是以 '/' 前缀开头输出一系列字符，自定义的修改 symbols.yaml
 punctuator:
-  digit_separators: ":,"
+  digit_separators: ":,."  #数字分隔符
   full_shape:
     ' ' : { commit: '　' }
     ',' : { commit: ， }
