@@ -91,20 +91,18 @@ engine:
   filters:
     - lua_filter@*chars_filter                      #字符集过滤
     - lua_filter@*cold_word_drop.filter
-    - lua_filter@*long_word_filter                  #长词优先      
     - lua_filter@*autocap_filter                    # 英文自动大写
-    - lua_filter@*pin_cand_filter                   # 置顶候选项（顺序要求：置顶候选项 > Emoji > 简繁切换）
     - lua_filter@*reduce_english_filter             # 降低部分英语单词在候选项的位置
     - reverse_lookup_filter@radical_reverse_lookup  # 部件拆字滤镜，放在pro_comment_format前面，进一步被超级注释处理以获得拼音编码+辅助码的提示
     - lua_filter@*pro_preedit_format                #将输入码显示为带音调全拼
     - simplifier@emoji                              # Emoji
+    - lua_filterreduce_emoji_filter                 #降低影子候选emoji
     - simplifier@traditionalize                     # 简繁切换
     - simplifier@mars                               #火星文
     - simplifier@chinese_english                    #中英翻译
     - simplifier@zrm_chaifen                        #自然码拆分型辅助码查询
     - lua_filter@*search@radical_pinyin             # 部件拆字辅码放在简繁转换之后
-#    - lua_filter@*cn_en_spacer                     #启用时中英混输为中英混输词条（cn_en.dict.yaml）自动增加空格，示例：`VIP中P` → `VIP 中 P`              
-#    - lua_filter@*en_spacer                        #启用时中文状态下输入英文单词后面自动追加空格
+    - lua_filter@*en_spacer                         #启用时中文状态下输入英文单词后面自动追加空格
     - lua_filter@*pro_comment_format                #超级注释模块，支持错词提示、辅助码显示，部件组字读音注释，支持个性化配置和关闭相应的功能，详情搜索pro_comment_format进行详细配置
     - uniquifier                                    # 去重
 
@@ -127,20 +125,6 @@ lunar: lunar  # 农历： 二〇二三年冬月二十 癸卯年（兔）冬月�
 # Lua 配置：计算器触发关键字
 calculator:
   trigger: "V"
-
-# Lua 配置: 置顶候选项
-# 注释太长了，请参考 pin_cand_filter.lua 开头的说明书。
-pin_cand_filter:
-  # 格式：编码<Tab>字词1<Space>字词2……
-  - b	吧
-  - d	的
-  - l	了
-  - m	吗
-
-#Lua 配置:长词优先
-long_word_filter:
-  count: 4
-  idx: 3
 
 # Lua 配置: 降低部分英语单词在候选项的位置。
 # 详细介绍 https://dvel.me/posts/make-rime-en-better/#短单词置顶的问题
@@ -181,16 +165,11 @@ reduce_english_filter:
 # 主翻译器，拼音
 translator:
   dictionary: zrm          # 挂载词库 zrm.dict.yaml
-  prioritize_quality: true  # 启用优先质量选项
   enable_completion: true  # 启用候选词补全
-  max_candidates: 10  # 设置最大候选词数量
-#  single_char_first: true  # 优先显示单个字符
-#  candidate_filter: "^(?!abc).*$"  # 过滤掉包含 "abc" 的候选词
 #  user_dict: zrm.userdb  # 用户词典的文件名称
 #  db_class: tabledb  #开启后就不会产生zrm.userdb这样的文件夹，会直接输出文本zrm.txt同时无法使用同步能力
   enable_user_dict: false # 是否开启自动调频
   enable_correction: false #是否开启自动纠错
-#  encode_commit_history: true   # 预留历史上屏自动编码成词
   initial_quality: 3       # 初始质量拼音的权重应该比英文大
   spelling_hints: 100            # 将注释以词典字符串形式完全暴露，通过pro_comment_format.lua完全接管，灵活配置。
   always_show_comments: true    # Rime 默认在 preedit 等于 comment 时取消显示 comment，这里强制一直显示，供pro_comment_format.lua做判断用。
