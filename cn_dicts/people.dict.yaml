@@ -5,7 +5,7 @@
 #^(?!.*阿姨|.*爸爸|.*伯伯|.*老师|.*村|.*乡|.*镇|.*老|.*宅|.*店|.*家|.*爷爷|.*奶奶|.*大人|.*先生|.*女士)[夏|宋|徐|丁|崔|白|梁|岳|段|赵|钱|孙|李|周|吴|郑|王|冯|秦|陈|杜|褚|卫|蒋|沈|韩|杨|朱|尤|许|何|吕|张|孔|曹|严|华|金|魏|陶|江|姜|苏|鲁|罗|雷|黄|马|叶]..\t.*\t[1-9][0-3][0-9]{2}$\n
 ---
 name: people
-version: "2025-02-08 19:07"
+version: "2025-02-09 01:33"
 sort: by_weight
 ...
 白波	bái;po bō;dy	375
@@ -39593,6 +39593,24 @@ sort: by_weight
 曽我町子	cēng; wǒ;pg tīng;td zǐ;va	156
 曾我町子	céng;eo wǒ;pg tīng;td zǐ;va	116
 曾我萧白	céng;eo wǒ;pg xiāo;cs bái;po	191
+川岛爱华	chuān;pa dǎo;ps ài;py huá;ru	1
+川岛得爱	chuān;pa dǎo;ps dé;rc ài;py	284
+川岛芳子	chuān;pa dǎo;ps fāng;cf zǐ;va	527
+川岛海荷	chuān;pa dǎo;ps hǎi;dm hé;ck	296
+川岛泓野	chuān;pa dǎo;ps hóng;dv yě;ly	315
+川岛浪速	chuān;pa dǎo;ps làng;dh sù;zu	347
+川岛梨乃	chuān;pa dǎo;ps lí;hl nǎi;vp	269
+川岛令美	chuān;pa dǎo;ps lìng;rv měi;ed	1
+川岛美希	chuān;pa dǎo;ps měi;ed xī;xj	1
+川岛奈奈	chuān;pa dǎo;ps nài;dx nài;dx	1
+川岛千寻	chuān;pa dǎo;ps qiān;pu xún;vc	315
+川岛武宜	chuān;pa dǎo;ps wǔ;vg yí;gq	77
+川岛秀明	chuān;pa dǎo;ps xiù;hn míng;oo	1
+川岛亚美	chuān;pa dǎo;ps yà;ay měi;ed	125
+川岛永嗣	chuān;pa dǎo;ps yǒng;dn sì;kk	294
+川岛悠美	chuān;pa dǎo;ps yōu;rx měi;ed	92
+川岛章吾	chuān;pa dǎo;ps zhāng;lu wú;wk	1
+川岛直美	chuān;pa dǎo;ps zhí;ua měi;ed	230
 春藤佳奈	chūn;ao téng;cu jiā;rt nài;dx	35
 村上国清	cūn;lc shàng;aa guó;wy qīng;do	69
 村上和也	cūn;lc shàng;aa hé;hk yě;vv	103
@@ -39870,6 +39888,7 @@ sort: by_weight
 色彩调配	sè;eb cǎi;pp tiáo;yk pèi;yj	233
 森泽佳奈	sēn;ll zé;da jiā;rt nài;dx	77
 杉浦加奈	shān;lp pǔ;df jiā;lk nài;dx	1
+上下川岛	shàng;aa xià;ab chuān;pa dǎo;ps	262
 室加奈子	shì;gt jiā;lk nài;dx zǐ;va	219
 矢口高雄	shǐ;pt kǒu;aa gāo;wk xióng;aa	178
 矢口狡赖	shǐ;pt kǒu;aa jiǎo;qx lài;ur	1
@@ -40225,7 +40244,8 @@ sort: by_weight
 原田亚希	yuán;ix tián;wu yà;ay xī;xj	1
 猿田彦命	yuán;qh tián;wu yàn;wp mìng;re	134
 猿田彦神	yuán;qh tián;wu yàn;wp shén;pu	142
-猿田彦为	yuán;qh tián;wu yàn;wp wéi;dd	1原田夜舞	yuán tián yè wǔ
+猿田彦为	yuán;qh tián;wu yàn;wp wéi;dd	1
+原田夜舞	yuán;ix tián;wu yè;wn wǔ;pa	1
 原田樱怜	yuán;ix tián;wu yīng;ln lián;xv	1
 苑田勇一	yuàn;cv tián;wu yǒng;vl yī;aa	125
 原田友贵	yuán;ix tián;wu yǒu;ay guì;vr	162

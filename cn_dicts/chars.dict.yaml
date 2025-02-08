@@ -3,7 +3,7 @@
 #https://github.com/amzxyz/RIME-LMDG
 ---
 name: chars
-version: "2025-02-08 19:07"
+version: "2025-02-09 01:33"
 sort: by_weight
 ...
 啊	a;kk	915
@@ -45424,12 +45424,12 @@ sort: by_weight
 于	yú;av	827
 语	yǔ;yk	808
 预	yù;vr	778
+雨	yǔ;ad	776
 育	yù;wo	774
 域	yù;tg	757
 鱼	yú;ea	756
 遇	yù;zd	730
 余	yú;rx	720
-雨	yǔ;ad	711
 与	yù;aa	700
 玉	yù;wd	700
 娱	yú;nt	687
@@ -50768,6 +50768,7 @@ sort: by_weight
 昨	zuó;ov	699
 佐	zuǒ;rg	627
 琢	zuó;wn	539
+作	zuō;rv	521
 咗	zuo;kg	496
 唑	zuò;kt	490
 祚	zuò;pv	444

@@ -19,10 +19,10 @@ function M.run_fuzhu(cand, initial_comment)
         if match then
             -- 处理 `,` 分割的多个辅助码
             for sub_match in match:gmatch("[^,]+") do
-                table.insert(full_fuzhu_list, sub_match) -- 存储完整辅助码
-                local first_char = sub_match:sub(1, 1)   -- 获取首字母
+                table.insert(full_fuzhu_list, sub_match)
+                local first_char = sub_match:sub(1, 1)
                 if first_char and first_char ~= "" then
-                    table.insert(first_fuzhu_list, first_char) -- 存储片段的第一位
+                    table.insert(first_fuzhu_list, first_char)
                 end
             end
         end
@@ -33,25 +33,26 @@ end
 
 -- **判断是否是数字或字母**
 local function is_alnum(text)
-    return text:match("^[%w]+$") ~= nil
+    return text:match("^[%w]+$") ~= nil  -- 仅匹配字母或数字
 end
 
 -- **主逻辑**
 function M.func(input, env)
     local context = env.engine.context
-    local input_code = context.input -- 获取输入码
+    local input_code = context.input
     local input_len = utf8.len(input_code)
 
-    -- 只有当输入码长度为 3 或 4 时才处理
+    -- **只有当输入码长度为 3 或 4 时才处理**
     if input_len < 3 or input_len > 4 then
         for cand in input:iter() do
-            yield(cand) -- 直接按原顺序输出
+            yield(cand)
         end
         return
     end
 
     local single_char_cands = {} -- 仅存单字
-    local other_cands = {}  -- 其他所有候选词（包括双字及以上）
+    local alnum_cands = {} -- 存储双字汉字
+    local other_cands = {}  -- 其他所有候选词（包括字母、数字、3 字及以上的词）
 
     -- **获取输入码的最后 2 个字符**
     local last_two_chars = input_code:sub(-2)
@@ -60,10 +61,12 @@ function M.func(input, env)
     -- **读取所有候选词**
     for cand in input:iter() do
         local len = utf8.len(cand.text)
-        if len == 1 and not is_alnum(cand.text) then
-            table.insert(single_char_cands, cand)  -- **存储单字（排除字母、数字）**
+        if is_alnum(cand.text) then
+            table.insert(alnum_cands, cand)  -- **存储双字词（非字母/数字）**
+        elseif len == 1 and not is_alnum(cand.text) then
+            table.insert(single_char_cands, cand)  -- **存储单字**
         else
-            table.insert(other_cands, cand)  -- **存储所有非单字候选词**
+            table.insert(other_cands, cand)  -- **存储其他（字母/数字/多字）**
         end
     end
 
@@ -78,7 +81,6 @@ function M.func(input, env)
         -- **匹配逻辑**
         local matched = false
         if input_len == 4 then
-            -- **4 码输入时，匹配完整辅助码**
             for _, segment in ipairs(full_fuzhu_list) do
                 if segment == last_two_chars then
                     matched = true
@@ -86,7 +88,6 @@ function M.func(input, env)
                 end
             end
         elseif input_len == 3 then
-            -- **3 码输入时，匹配辅助码的第一位**
             for _, segment in ipairs(first_fuzhu_list) do
                 if segment == last_one_char then
                     matched = true
@@ -102,19 +103,44 @@ function M.func(input, env)
         end
     end
 
-    -- **先输出所有非单字候选词（双字及以上的词组）**
-    for _, cand in ipairs(other_cands) do
-        yield(cand)
+    -- **输入长度为 3 时，调整候选顺序**
+    if input_len == 3 then
+        -- **先输出其他**
+        for _, cand in ipairs(other_cands) do
+            yield(cand)
+        end
+
+        -- **然后输出匹配的单字**
+        for _, cand in ipairs(moved_singles) do
+            yield(cand)
+        end
+
+        -- **再输出未匹配的单字**
+        for _, cand in ipairs(reordered_singles) do
+            yield(cand)
+        end
+
+        -- **最后输出其他数字字母**
+        for _, cand in ipairs(alnum_cands) do
+            yield(cand)
+        end
+        return
     end
 
-    -- **然后输出所有匹配的单字**
-    for _, cand in ipairs(moved_singles) do
-        yield(cand)
-    end
-
-    -- **最后输出剩余的单字**
-    for _, cand in ipairs(reordered_singles) do
-        yield(cand)
+    -- **输入长度为 4 时，维持原有排序**
+    if input_len == 4 then
+        for _, cand in ipairs(other_cands) do
+            yield(cand)
+        end
+        for _, cand in ipairs(alnum_cands) do
+            yield(cand)
+        end
+        for _, cand in ipairs(moved_singles) do
+            yield(cand)
+        end
+        for _, cand in ipairs(reordered_singles) do
+            yield(cand)
+        end
     end
 end
 
