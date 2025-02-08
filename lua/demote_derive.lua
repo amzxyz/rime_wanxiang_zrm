@@ -2,7 +2,7 @@
 --abbrev的时候通过辅助码匹配提权单字放在双字后面第一位
 local M = {}
 
--- 获取辅助码的处理逻辑
+-- **获取辅助码的处理逻辑**
 function M.run_fuzhu(cand, initial_comment)
     local full_fuzhu_list = {}   -- 存储完整的辅助码片段
     local first_fuzhu_list = {}  -- 存储每个片段的第一位
@@ -31,6 +31,12 @@ function M.run_fuzhu(cand, initial_comment)
     return full_fuzhu_list, first_fuzhu_list
 end
 
+-- **判断是否是数字或字母**
+local function is_alnum(text)
+    return text:match("^[%w]+$") ~= nil
+end
+
+-- **主逻辑**
 function M.func(input, env)
     local context = env.engine.context
     local input_code = context.input -- 获取输入码
@@ -44,32 +50,29 @@ function M.func(input, env)
         return
     end
 
-    local single_char_cands = {}
-    local double_char_cands = {}
-    local others = {}
+    local single_char_cands = {} -- 仅存单字
+    local other_cands = {}  -- 其他所有候选词（包括双字及以上）
 
     -- **获取输入码的最后 2 个字符**
     local last_two_chars = input_code:sub(-2)
     local last_one_char = input_code:sub(-1)
 
-    -- 读取所有候选词
+    -- **读取所有候选词**
     for cand in input:iter() do
         local len = utf8.len(cand.text)
-        if len == 2 then
-            table.insert(double_char_cands, cand)
-        elseif len == 1 then
-            table.insert(single_char_cands, cand)
+        if len == 1 and not is_alnum(cand.text) then
+            table.insert(single_char_cands, cand)  -- **存储单字（排除字母、数字）**
         else
-            table.insert(others, cand)
+            table.insert(other_cands, cand)  -- **存储所有非单字候选词**
         end
     end
 
-    -- 处理单字的排序逻辑
+    -- **处理单字的排序逻辑**
     local reordered_singles = {}
-    local moved_singles = {}  -- 存储所有匹配的单字
+    local moved_singles = {}  -- **存储所有匹配的单字**
 
     for _, cand in ipairs(single_char_cands) do
-        -- 获取完整辅助码列表和首字母列表
+        -- **获取完整辅助码列表和首字母列表**
         local full_fuzhu_list, first_fuzhu_list = M.run_fuzhu(cand, cand.comment or "")
 
         -- **匹配逻辑**
@@ -99,8 +102,8 @@ function M.func(input, env)
         end
     end
 
-    -- **先输出双字候选**
-    for _, cand in ipairs(double_char_cands) do
+    -- **先输出所有非单字候选词（双字及以上的词组）**
+    for _, cand in ipairs(other_cands) do
         yield(cand)
     end
 
@@ -109,13 +112,8 @@ function M.func(input, env)
         yield(cand)
     end
 
-    -- **然后输出剩余的单字**
+    -- **最后输出剩余的单字**
     for _, cand in ipairs(reordered_singles) do
-        yield(cand)
-    end
-
-    -- **最后输出剩余的候选词**
-    for _, cand in ipairs(others) do
         yield(cand)
     end
 end
