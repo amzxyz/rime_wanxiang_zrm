@@ -4,8 +4,8 @@ local M = {}
 
 -- 获取辅助码的处理逻辑
 function M.run_fuzhu(cand, initial_comment)
-    local final_comment = nil
-    local fuzhu_comments = {}
+    local full_fuzhu_list = {}   -- 存储完整的辅助码片段
+    local first_fuzhu_list = {}  -- 存储每个片段的第一位
 
     -- 先用空格将注释分成多个片段
     local segments = {}
@@ -17,101 +17,104 @@ function M.run_fuzhu(cand, initial_comment)
     for _, segment in ipairs(segments) do
         local match = segment:match(";(.+)$")
         if match then
-            table.insert(fuzhu_comments, match)
+            -- 处理 `,` 分割的多个辅助码
+            for sub_match in match:gmatch("[^,]+") do
+                table.insert(full_fuzhu_list, sub_match) -- 存储完整辅助码
+                local first_char = sub_match:sub(1, 1)   -- 获取首字母
+                if first_char and first_char ~= "" then
+                    table.insert(first_fuzhu_list, first_char) -- 存储片段的第一位
+                end
+            end
         end
     end
 
-    -- 将提取的拼音片段用空格连接起来
-    if #fuzhu_comments > 0 then
-        final_comment = table.concat(fuzhu_comments, " ")
-    end
-
-    return final_comment or ""  -- 确保返回最终值
+    return full_fuzhu_list, first_fuzhu_list
 end
 
 function M.func(input, env)
     local context = env.engine.context
     local input_code = context.input -- 获取输入码
+    local input_len = utf8.len(input_code)
 
     -- 只有当输入码长度为 3 或 4 时才处理
-    if utf8.len(input_code) < 3 or utf8.len(input_code) > 4 then
+    if input_len < 3 or input_len > 4 then
         for cand in input:iter() do
             yield(cand) -- 直接按原顺序输出
         end
         return
     end
 
-    local candidates = {} -- 存储符合条件的候选词
-    local others = {} -- 存储剩余的候选词
-    local single_char_cands = {} -- 存储单字候选
-    local double_char_cands = {} -- 存储双字候选
+    local single_char_cands = {}
+    local double_char_cands = {}
+    local others = {}
 
-    -- 判断是否是数字或字母
-    local function is_alnum(text)
-        return text:match("^[%w]+$") ~= nil
-    end
-
-    -- **修改 `get_comment()`，使用 `M.run_fuzhu()` 获取辅助码**
-    local function get_comment(cand)
-        return M.run_fuzhu(cand, cand.comment or "")
-    end
-
-    -- 获取输入码的后两个字符
+    -- **获取输入码的最后 2 个字符**
     local last_two_chars = input_code:sub(-2)
+    local last_one_char = input_code:sub(-1)
 
     -- 读取所有候选词
-    local count = 0
     for cand in input:iter() do
         local len = utf8.len(cand.text)
-
-        if len == 2 and not is_alnum(cand.text) then
-            table.insert(double_char_cands, cand) -- 存储双字候选
-        elseif len == 1 and not is_alnum(cand.text) then
-            table.insert(single_char_cands, cand) -- 存储单字候选
+        if len == 2 then
+            table.insert(double_char_cands, cand)
+        elseif len == 1 then
+            table.insert(single_char_cands, cand)
         else
-            table.insert(others, cand) -- 不符合条件的候选词存入 others
+            table.insert(others, cand)
         end
     end
 
     -- 处理单字的排序逻辑
     local reordered_singles = {}
-    local moved_single = nil
+    local moved_singles = {}  -- 存储所有匹配的单字
 
     for _, cand in ipairs(single_char_cands) do
-        local comment = get_comment(cand) -- **调用 `M.run_fuzhu()` 解析辅助码**
+        -- 获取完整辅助码列表和首字母列表
+        local full_fuzhu_list, first_fuzhu_list = M.run_fuzhu(cand, cand.comment or "")
 
-        -- **使用 `,` 逗号分割辅助码，并检查是否有一个片段匹配**
+        -- **匹配逻辑**
         local matched = false
-        for segment in comment:gmatch("[^,]+") do
-            if segment == last_two_chars then
-                matched = true
-                break
+        if input_len == 4 then
+            -- **4 码输入时，匹配完整辅助码**
+            for _, segment in ipairs(full_fuzhu_list) do
+                if segment == last_two_chars then
+                    matched = true
+                    break
+                end
+            end
+        elseif input_len == 3 then
+            -- **3 码输入时，匹配辅助码的第一位**
+            for _, segment in ipairs(first_fuzhu_list) do
+                if segment == last_one_char then
+                    matched = true
+                    break
+                end
             end
         end
 
         if matched then
-            moved_single = cand -- 记录匹配的单字
+            table.insert(moved_singles, cand) -- 记录所有匹配的单字
         else
-            table.insert(reordered_singles, cand) -- 不匹配的单字放入重新排序的列表
+            table.insert(reordered_singles, cand)
         end
     end
 
-    -- 输出双字候选
+    -- **先输出双字候选**
     for _, cand in ipairs(double_char_cands) do
         yield(cand)
     end
 
-    -- 如果找到匹配的单字，先输出双字候选，再放到单字的第一位
-    if moved_single then
-        yield(moved_single)
+    -- **然后输出所有匹配的单字**
+    for _, cand in ipairs(moved_singles) do
+        yield(cand)
     end
 
-    -- 输出其余单字候选
+    -- **然后输出剩余的单字**
     for _, cand in ipairs(reordered_singles) do
         yield(cand)
     end
 
-    -- 输出其余候选词
+    -- **最后输出剩余的候选词**
     for _, cand in ipairs(others) do
         yield(cand)
     end
