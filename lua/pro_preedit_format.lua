@@ -24,54 +24,48 @@ local function modify_preedit_filter(input, env)
         local preedit = genuine_cand.preedit or ""
 
         if is_tone_display and #preedit >= 2 then
-            if string.find(genuine_cand.text, "%w+") then
-                genuine_cand.preedit = genuine_cand.text
-            else
-                -- 处理 preedit
-                local input_parts = {}
-                local current_segment = ""
+            -- 处理 preedit
+            local input_parts = {}
+            local current_segment = ""
 
-                for i = 1, #preedit do
-                    local char = preedit:sub(i, i)
-                    if char == auto_delimiter or char == manual_delimiter then
-                        if #current_segment > 0 then
-                            table.insert(input_parts, current_segment)
-                            current_segment = ""
-                        end
-                        table.insert(input_parts, char)
-                    else
-                        current_segment = current_segment .. char
+            for i = 1, #preedit do
+                local char = preedit:sub(i, i)
+                if char == auto_delimiter or char == manual_delimiter then
+                    if #current_segment > 0 then
+                        table.insert(input_parts, current_segment)
+                        current_segment = ""
                     end
-                end
-
-                if #current_segment > 0 then
-                    table.insert(input_parts, current_segment)
-                end
-
-                -- 提取拼音片段
-                local comment = genuine_cand.comment
-                if comment then
-                    local pinyin_segments = {}
-                    for segment in string.gmatch(comment, "[^" .. auto_delimiter .. manual_delimiter .. "]+") do
-                        local pinyin = string.match(segment, "^[^;]+")
-                        if pinyin then
-                            table.insert(pinyin_segments, pinyin)
-                        end
-                    end
-
-                    local pinyin_index = 1
-                    for i, part in ipairs(input_parts) do
-                        if part ~= auto_delimiter and part ~= manual_delimiter and pinyin_index <= #pinyin_segments then
-                            input_parts[i] = pinyin_segments[pinyin_index]
-                            pinyin_index = pinyin_index + 1
-                        end
-                    end
-
-                    local final_preedit = table.concat(input_parts)
-                    genuine_cand.preedit = final_preedit
+                    table.insert(input_parts, char)
                 else
-                    genuine_cand.preedit = genuine_cand.text
+                    current_segment = current_segment .. char
                 end
+            end
+
+            if #current_segment > 0 then
+                table.insert(input_parts, current_segment)
+            end
+
+            -- 提取拼音片段
+            local comment = genuine_cand.comment
+            if comment then
+                local pinyin_segments = {}
+                for segment in string.gmatch(comment, "[^" .. auto_delimiter .. manual_delimiter .. "]+") do
+                    local pinyin = string.match(segment, "^[^;]+")
+                    if pinyin then
+                        table.insert(pinyin_segments, pinyin)
+                    end
+                end
+
+                local pinyin_index = 1
+                for i, part in ipairs(input_parts) do
+                    if part ~= auto_delimiter and part ~= manual_delimiter and pinyin_index <= #pinyin_segments then
+                        input_parts[i] = pinyin_segments[pinyin_index]
+                        pinyin_index = pinyin_index + 1
+                    end
+                end
+
+                local final_preedit = table.concat(input_parts)
+                genuine_cand.preedit = final_preedit
             end
         end
         yield(genuine_cand)
