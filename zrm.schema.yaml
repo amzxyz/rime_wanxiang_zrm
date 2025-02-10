@@ -93,7 +93,6 @@ engine:
     - lua_filter@*cold_word_drop.filter
     - lua_filter@*assist_sort                       #配合abbrev辅助码派生配合辅助码逻辑四码时候词组优先、匹配四码的单字紧随其后，并且肩负着中文、英文、数字候选之间的排序关系
     - lua_filter@*autocap_filter                    # 英文自动大写
-    - lua_filter@*reduce_english_filter             # 降低部分英语单词在候选项的位置
     - reverse_lookup_filter@radical_reverse_lookup  # 部件拆字滤镜，放在pro_comment_format前面，进一步被超级注释处理以获得拼音编码+辅助码的提示
     - lua_filter@*pro_preedit_format                #将输入码显示为带音调全拼
     - simplifier@emoji                              # Emoji
@@ -125,41 +124,6 @@ lunar: lunar  # 农历： 二〇二三年冬月二十 癸卯年（兔）冬月�
 # Lua 配置：计算器触发关键字
 calculator:
   trigger: "V"
-
-# Lua 配置: 降低部分英语单词在候选项的位置。
-# 详细介绍 https://dvel.me/posts/make-rime-en-better/#短单词置顶的问题
-# 正常情况： 输入 rug 得到 「1.rug 2.如果 …… 」
-# 降低之后： 输入 rug 得到 「1.如果 2.rug …… 」
-# 几种模式：
-# all     降低脚本内置的单词（所有 3~4 位长度、前 2~3 位是完整拼音、最后一位是声母），words 作为自定义的额外补充
-# custom  完全自定义，只降低 words 里的
-# none    不降低任何单词，相当于没有启用这个 Lua
-# （匹配的是编码，不是单词）
-reduce_english_filter:
-  mode: custom  # all | custom | none
-  idx: 2        # 降低到第 idx 个位置
-  # 自定义的单词列表，示例列表没有降低部分常用单词，如 and cat mail Mac but bad shit ……
-  words: [
-    aid, ann,
-    bail, bait, bam, band, bans, bat, bay, bend, bent, benz, bib, bid, bien, biz, boc, bop, bos, bud, buf, bach, bench, bush,
-    cab, cad, cain, cam, cans, cap, cas, cef, chad, chan, chap, chef, cher, chew, chic, chin, chip, chit, coup, cum, cunt, cur, couch,
-    dab, dag, dal, dam, dent, dew, dial, diet, dim, din, dip, dis, dit, doug, dub, dug, dunn,
-    fab, fax, fob, fog, foul, fur,
-    gag, gail, gain, gal, gam, gaol, ged, gel, ger, guam, gus, gut,
-    hail, ham, hank, hans, hat, hay, heil, heir, hem, hep, hud, hum, hung, hunk, hut, hush,
-    jim, jug,
-    kat,
-    lab, lad, lag, laid, lam, laos, lap, lat, lax, lay, led, leg, lex, liam, lib, lid, lied, lien, lies, linn, lip, lit, liz, lob, lug, lund, lung, lux, lash, loch, lush,
-    mag, maid, mann, mar, mat, med, mel, mend, mens, ment, mil, mins, mint, mob, moc, mop, mos, mot, mud, mug, mum, mesh,
-    nap, nat, nay, neil, nib, nip, noun, nous, nun, nut, nail, nash,
-    pac, paid, pail, pain, pair, pak, pal, pam, pans, pant, pap, par, pat, paw, pax, pens, pic, pier, pies, pins, pint, pit, pix, pod, pop, pos, pot, pour, pow, pub, pinch, pouch,
-    rand, rant, rent, rep, res, ret, rex, rib, rid, rig, rim, rub, rug, rum, runc, runs, ranch,
-    sac, sail, sal, sam, sans, sap, saw, sax, sew, sham, shaw, shin, sig, sin, sip, sis, suit, sung, suns, sup, sur, sus,
-    tad, tail, taj, tar, tax, tec, ted, tel, ter, tex, tic, tied, tier, ties, tim, tin, tit, tour, tout, tum,
-    wag, wand, womens, wap, wax, weir, won,
-    yan, yen,
-    zach
-  ]
 
 
 # 主翻译器，拼音
