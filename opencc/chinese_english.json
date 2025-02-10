@@ -3,8 +3,8 @@
 	"segmentation": {
 		"type": "mmseg",
 		"dict": {
-			"type": "text",
-			"file": "chinese_english.txt"
+			"type": "ocd2",
+			"file": "chinese_english.ocd2"
 		}
 	},
 	"conversion_chain": [
@@ -13,12 +13,12 @@
 				"type": "group",
 				"dicts": [
 					{
-						"type": "text",
-						"file": "chinese_english.txt"
+						"type": "ocd2",
+						"file": "chinese_english.ocd2"
 					},
 					{
-						"type": "text",
-						"file": "english_chinese.txt"
+						"type": "ocd2",
+						"file": "english_chinese.ocd2"
 					}
 				]
 			}
