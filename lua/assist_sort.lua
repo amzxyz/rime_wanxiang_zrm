@@ -22,9 +22,9 @@ function M.run_fuzhu(cand, initial_comment)
     return full_fuzhu_list, first_fuzhu_list
 end
 
--- **判断是否为字母或数字**
+-- **判断是否为字母或数字和特定符号**
 local function is_alnum(text)
-    return text:match("^[%w%s%p]+$") ~= nil
+    return text:match("^[%w%s%.%-_%']+$") ~= nil
 end
 
 -- **主逻辑**

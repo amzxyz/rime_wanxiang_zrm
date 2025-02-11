@@ -112,14 +112,14 @@ pro_comment_format:
 
 # Lua 配置: 日期、时间、星期、ISO 8601、时间戳的触发关键字
 date_translator:
-  date: date            # 日期： 2022-11-29
-  time: time            # 时间： 18:13
-  week: week            # 星期： 星期二
-  datetime: datetime    # ISO 8601： 2022-11-29T18:13:11+08:00
-  timestamp: timestamp  # 时间戳： 1669716794
+  date: /rq            # 日期： 2022-11-29
+  time: /sj            # 时间： 18:13
+  week: /wk            # 星期： 星期二
+  datetime: /dt    # ISO 8601： 2022-11-29T18:13:11+08:00
+  timestamp: /tt  # 时间戳： 1669716794
 
 # Lua 配置：农历的触发关键字
-lunar: lunar  # 农历： 二〇二三年冬月二十 癸卯年（兔）冬月二十
+lunar: /nl  # 农历： 二〇二三年冬月二十 癸卯年（兔）冬月二十
 
 # Lua 配置：计算器触发关键字
 calculator:
