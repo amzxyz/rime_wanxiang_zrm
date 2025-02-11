@@ -15,7 +15,7 @@ sort: by_weight
 腌	ā;od	268
 吖	ā;ky	250
 啊	à;kk	146
-啊	ǎ;kk	1
+啊	ǎ;kk	19
 呵	a;kk	1
 錒	ā;jk	1
 𠼞	ā;hy	1
@@ -632,7 +632,6 @@ sort: by_weight
 𩹏	bà;	1
 𩽷	bà;	1
 𫓥	bā;	1
-吧	ba;kb	1
 白	bái;po	785
 百	bǎi;ab	758
 佰	bǎi;ro	712
@@ -12530,7 +12529,7 @@ sort: by_weight
 𪐦	hāng;	1
 𪕇	hāng;	1
 𪗜	háng;	1
-好	hǎo;nz	880
+好	hǎo;nz	983
 号	hào;kv	791
 好	hào;nz	696
 豪	háo;wn	685
@@ -12671,7 +12670,7 @@ sort: by_weight
 𩫚	háo;	1
 𩮘	hāo;	1
 𩲊	hào;	1
-和	hé;hk	905
+和	hé;hk	985
 合	hé;rk	839
 何	hé;rk	804
 河	hé;dk	742
@@ -13014,9 +13013,6 @@ sort: by_weight
 𫰟	héng;	1
 堼	hèng;tt	1
 行	héng;rd	1
-哼	hng;kl	1
-哼	hng;kl	1
-乥	hol;	1
 红	hóng;sg	769
 洪	hóng;db	655
 宏	hóng;gv	654
@@ -14713,6 +14709,7 @@ sort: by_weight
 咟	huò;	150
 靃	huò;	130
 騞	huō;	124
+和	huo;hk	111
 俰	huò;	105
 奯	huò;	105
 謋	huò;	105
@@ -14850,7 +14847,6 @@ sort: by_weight
 𫉬	huò;	1
 𫔓	huò;	1
 𫙇	huò;	1
-和	huo;hk	1
 嚄	huō;ky	1
 锪	huō;jx	1
 即	jí;ve	895
@@ -26088,9 +26084,6 @@ sort: by_weight
 嗯	ńg;kx	332
 嗯	ňg;kx	1
 㕶	ňg;	1
-嗯	ńg;kx	1
-嗯	ňg;kx	1
-嗯	ǹg;kx	1
 你	nǐ;rx	861
 尼	ní;ub	740
 拟	nǐ;fr	696
@@ -50931,7 +50924,6 @@ sort: by_weight
 糳	zuò;	50
 繓	zuǒ;	50
 飵	zuò;	38
-作	zuō;rv	1
 岝	zuò;	1
 撮	zuǒ;fy	1
 𦈛	zuǒ;	1
@@ -51010,6 +51002,7 @@ sort: by_weight
 𫝷	zuò;	1
 呒	ḿ;kw	1
 呣	ḿ;km	1
+乥	无;	1
 夞	无;	1
 𥩟	无;	1
 𪸩	无;	1
