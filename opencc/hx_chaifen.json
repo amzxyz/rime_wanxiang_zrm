@@ -3,16 +3,16 @@
   "segmentation": {
     "type": "mmseg",
     "dict": {
-      "type": "ocd2",
-      "file": "hx_chaifen.ocd2"
+      "type": "text",
+      "file": "hx_chaifen.txt"
     }
   },
   "conversion_chain": [{
     "dict": {
       "type": "group",
       "dicts": [{
-        "type": "ocd2",
-        "file": "hx_chaifen.ocd2"
+        "type": "text",
+        "file": "hx_chaifen.txt"
       }]
     }
   }]

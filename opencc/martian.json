@@ -3,15 +3,15 @@
   "segmentation": {
     "type": "mmseg",
     "dict": {
-      "type": "ocd2",
-      "file": "martian.ocd2"
+      "type": "text",
+      "file": "martian.txt"
     }
   },
   "conversion_chain": [
     {
       "dict": {
-        "type": "ocd2",
-        "file": "martian.ocd2"
+        "type": "text",
+        "file": "martian.txt"
       }
     }
   ]
