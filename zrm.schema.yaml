@@ -34,7 +34,7 @@ switches:
   - name: chinese_english
     states: [ 译, 翻 ]
   - name: tone_display
-    states: [ 调, 音 ]
+    states: [ 调, 声 ]
   - name: fuzhu_switch
     states: [ 助, 辅 ]
   - name: charset_filter
