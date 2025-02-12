@@ -1,3 +1,10 @@
+# Rime dictionary
+# encoding: utf-8
+---
+name: radical_pinyin
+version: "2025.04.14"
+sort: original
+...
 𱍂	long'long
 𱌽	chi'yi
 𱌺	chi'zhen
